@@ -23,7 +23,13 @@ def φβ (u q j a : ℕ) : Prop :=
 def stage₁ (s p t z y₀ : ℕ) : Prop := 
 φβ t p (2*s) z ∧ φβ t p (2*s+1) y₀
 
--- Example program 0 R₀ += ∣, 1 HALT
+
+ /-
+Example program:
+    0 R₀ = R₀ + ∣,
+    1 HALT
+    t p encodes the sequence 0,0,1,0 (line number 0, R₀=0, line number 1, R₀=0)
+ -/
 def inc_R0_once (u:fin 1) (u':fin 2) (u₀ u₀' : ℕ) : Prop :=
   -- in general it should depend on u but here u must be 0
   u'.1 = u.1 + 1 ∧ u₀' = u₀ + 1
@@ -53,18 +59,6 @@ def χ_steps (k:ℕ)(program:(fin k)→(fin k.succ)→ℕ→ ℕ→Prop) (t p i:
   ∀ i:fin s,  χ_steps k program t p i.1
 
 
- /-
-
-  χ₁ Program:
-    0 R₀ = R₀ + ∣,
-    1 HALT
-  t p should encode the sequence 0,0, 1,0 (line number 0, R₀=0, line number 1, R₀=0)
-
-  χ₁' Program:
-    0 R₀ = R₀ + ∣,
-    1 IF R₀ = □ THEN 1 ELSE 2,
-    2 HALT
- -/
 
 
 def b_0 (i p:ℕ) (a_ : vector (fin p) i) : ℕ :=
